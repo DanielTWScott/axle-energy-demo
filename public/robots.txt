@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://axle-energy-demo.vercel.app/sitemap.xml
+
+# Contact
+# For questions about this demo, contact: danieltwscott@gmail.com
+# GitHub: https://github.com/danieltwscott/axle-energy-demo

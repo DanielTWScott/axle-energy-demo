@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
+import { APP_CONFIG } from "@/lib/constants"
 
 export default function Error({
   error,
@@ -11,7 +12,7 @@ export default function Error({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error(error)
+    console.error("Axle Energy Demo Error:", error)
   }, [error])
 
   return (
@@ -23,7 +24,7 @@ export default function Error({
           We're having trouble loading your energy dashboard. This could be due to a network issue or a temporary
           service disruption.
         </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-3">
+        <div className="flex flex-col sm:flex-row justify-center gap-3 mb-6">
           <Button onClick={reset} className="bg-green-600 hover:bg-green-700 text-white">
             Try again
           </Button>
@@ -34,6 +35,25 @@ export default function Error({
           >
             Refresh page
           </Button>
+        </div>
+        <div className="text-xs text-slate-400 space-y-1">
+          <div>
+            Need help? Contact{" "}
+            <a href={`mailto:${APP_CONFIG.contact.support}`} className="text-green-400 hover:text-green-300">
+              {APP_CONFIG.contact.support}
+            </a>
+          </div>
+          <div>
+            Or{" "}
+            <a
+              href={APP_CONFIG.urls.issues}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-400 hover:text-green-300"
+            >
+              report an issue on GitHub
+            </a>
+          </div>
         </div>
       </div>
     </div>

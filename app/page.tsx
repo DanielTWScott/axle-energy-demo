@@ -46,6 +46,7 @@ export default function AxleResidentialPlatform() {
   const [carbonData, setCarbonData] = useState<CarbonData | null>(null)
   const [optimizationData, setOptimizationData] = useState<OptimizationInsights | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [lastUpdated, setLastUpdated] = useState(new Date())
 
   // Simulate current electricity price (in real app, this would come from an API)
@@ -54,9 +55,21 @@ export default function AxleResidentialPlatform() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [carbonResponse] = await Promise.all([fetch("/api/carbon-intensity")])
+        setError(null)
 
-        const carbonData = await carbonResponse.json()
+        // Add timeout to prevent infinite loading
+        const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("Request timeout")), 10000))
+
+        const fetchPromise = fetch("/api/carbon-intensity", {
+          headers: { "Cache-Control": "no-cache" },
+        })
+
+        const carbonResponse = (await Promise.race([fetchPromise, timeoutPromise])) as Response
+
+        let carbonData = null
+        if (carbonResponse.ok) {
+          carbonData = await carbonResponse.json()
+        }
 
         // Generate enhanced optimization data with carbon focus
         const optimizationData = {
@@ -83,10 +96,36 @@ export default function AxleResidentialPlatform() {
 
         setCarbonData(carbonData)
         setOptimizationData(optimizationData)
-        setIsLoading(false)
         setLastUpdated(new Date())
       } catch (error) {
         console.error("Error fetching data:", error)
+        setError(error instanceof Error ? error.message : "Failed to load data")
+
+        // Set fallback data so the app still works
+        const fallbackOptimizationData = {
+          portfolioPerformance: {
+            assetsOptimized: 15247,
+            totalCapacity: 187.3,
+            dailyRevenue: 47382,
+            carbonSaved: 23.7,
+            successRate: 94.2,
+          },
+          environmentalImpact: {
+            dailyCarbonSaved: 23.7,
+            monthlyEquivalent: "711 tonnes (equivalent to 142 cars off the road)",
+            yearlyProjection: 8651,
+            treesEquivalent: 393,
+          },
+          customerBenefits: {
+            avgMonthlySavings: 156.7,
+            avgCarbonReduction: 1.8,
+            greenEnergyUsage: 78.3,
+            gridStressReduction: 12.4,
+          },
+        }
+
+        setOptimizationData(fallbackOptimizationData)
+      } finally {
         setIsLoading(false)
       }
     }
@@ -116,9 +155,14 @@ export default function AxleResidentialPlatform() {
           <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-2">
             Loading Your Green Energy Dashboard...
           </h2>
-          <p className="text-sm sm:text-base text-slate-300">
+          <p className="text-sm sm:text-base text-slate-300 mb-4">
             Optimizing for maximum savings and minimum carbon impact
           </p>
+          {error && (
+            <div className="mt-4 p-3 bg-yellow-900/30 border border-yellow-600 rounded-lg">
+              <p className="text-yellow-300 text-sm">Note: Using demo data due to API limitations in production</p>
+            </div>
+          )}
         </div>
       </div>
     )
@@ -130,6 +174,16 @@ export default function AxleResidentialPlatform() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100">
       <div className="container mx-auto px-4 py-6 sm:py-8">
+        {/* Error Banner */}
+        {error && (
+          <div className="mb-4 p-3 bg-yellow-900/30 border border-yellow-600 rounded-lg">
+            <p className="text-yellow-300 text-sm">
+              ⚠️ Demo Mode: Using simulated data due to API limitations. In production, this would show live UK grid
+              data.
+            </p>
+          </div>
+        )}
+
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold mb-4">

@@ -13,6 +13,12 @@ A cutting-edge energy market intelligence platform that maximizes financial savi
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Real-time Updates**: Live data refresh every 5 minutes
 
+## 🚀 Live Demo
+
+**[View Live Demo →](https://axle-energy-demo.vercel.app/)**
+
+Experience the full Axle Energy platform with real-time UK grid data and interactive optimization analysis.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -25,7 +31,7 @@ A cutting-edge energy market intelligence platform that maximizes financial savi
 
 1. **Clone the repository**
    \`\`\`bash
-   git clone https://github.com/your-username/axle-energy-demo.git
+   git clone https://github.com/danieltwscott/axle-energy-demo.git
    cd axle-energy-demo
    \`\`\`
 
@@ -58,7 +64,7 @@ Create a `.env.local` file in the root directory:
 
 \`\`\`env
 # Required for production deployment
-NEXT_PUBLIC_VERCEL_URL=your-deployment-url.vercel.app
+NEXT_PUBLIC_VERCEL_URL=axle-energy-demo.vercel.app
 
 # Optional: Analytics
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
@@ -119,7 +125,7 @@ axle-energy-demo/
 │   ├── layout.tsx          # Root layout
 │   ├── page.tsx            # Main dashboard
 │   ├── loading.tsx         # Loading UI
-│   └── error.tsx           # Error boundary
+│   └── error.tsx          # Error boundary
 ├── components/ui/          # shadcn/ui components
 ├── lib/                    # Utility functions
 └── public/                 # Static assets
@@ -197,9 +203,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙋‍♂️ Support
 
 For questions or support:
-- Create an issue on GitHub
-- Contact: [your-email@example.com]
-- Documentation: [Link to docs]
+- **Email**: [danieltwscott@gmail.com](mailto:danieltwscott@gmail.com)
+- **GitHub Issues**: [Create an issue](https://github.com/danieltwscott/axle-energy-demo/issues)
+- **Live Demo**: [https://axle-energy-demo.vercel.app/](https://axle-energy-demo.vercel.app/)
 
 ## 🎯 Roadmap
 
@@ -210,6 +216,18 @@ For questions or support:
 - [ ] API rate limiting dashboard
 - [ ] Customer onboarding flow
 
+## 📊 Demo Highlights
+
+This demonstration showcases:
+
+- **Real UK Grid Data**: Live carbon intensity from National Grid ESO
+- **Interactive Trade-offs**: Compare financial vs environmental optimization strategies
+- **Portfolio Scale**: Simulated insights from 15,000+ managed battery systems
+- **Mobile Responsive**: Optimized experience across all devices
+- **Production Ready**: Full CI/CD pipeline with automated testing and deployment
+
 ---
 
 **Built with ❤️ for a sustainable energy future**
+
+*Created by Daniel Scott - [danieltwscott@gmail.com](mailto:danieltwscott@gmail.com)*
