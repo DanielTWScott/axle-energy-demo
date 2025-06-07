@@ -264,7 +264,3 @@ This demonstration showcases:
 *Concept demo by Daniel Scott - [danieltwscott@gmail.com](mailto:danieltwscott@gmail.com)*
 
 *Built to explore how Axle Energy's proven platform could evolve to include carbon-aware optimization*
-
-*Concept demo by Daniel Scott - [danieltwscott@gmail.com](mailto:danieltwscott@gmail.com)*
-
-*Built to explore how Axle Energy's proven platform could evolve to include carbon-aware optimization*
