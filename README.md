@@ -19,7 +19,7 @@ This is a **concept demonstration** of how Axle Energy's proven optimization pla
 - **Real-time Carbon Intelligence**: Live UK grid carbon intensity data integration
 - **Customer Preference Engine**: Customizable optimization strategies (Max Savings, Balanced, Max Green)
 - **Trade-off Visualization**: Interactive analysis of financial vs environmental decisions
-- **Portfolio Scale Simulation**: Insights across 15,000+ managed assets (using Axle's actual scale)
+- **Portfolio Scale Simulation**: Realistic metrics demonstrating potential at scale
 
 ### Technical Implementation
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
@@ -35,11 +35,11 @@ Experience the potential carbon-aware optimization platform with real-time UK gr
 
 ## 💡 The Concept
 
-### Current State (Axle's Proven Platform)
-- Optimizes 15,000+ home batteries for maximum financial returns
-- Proven track record with 94.2% optimization success rate
-- £156.7 average monthly savings per customer
-- Established market position in energy arbitrage
+### Current State (Axle's Platform)
+- Proven energy optimization technology
+- Established market position in distributed energy resources
+- Focus on maximizing customer financial returns
+- Growing portfolio of managed assets
 
 ### Proposed Enhancement (This Demo)
 - **Layer carbon awareness** on top of existing financial optimization
@@ -51,6 +51,17 @@ Experience the potential carbon-aware optimization platform with real-time UK gr
 - **For Customers**: Choice between maximizing savings or environmental impact
 - **For Axle**: Market differentiation and enhanced customer retention
 - **For Grid**: Better integration of renewable energy and reduced peak demand
+
+## ⚠️ Important Note
+
+**All performance metrics and portfolio numbers in this demo are simulated for demonstration purposes.** They represent realistic industry benchmarks and potential scale, but are not actual Axle Energy figures. The demo uses:
+
+- Simulated portfolio metrics (15,000+ assets, £156.7 monthly savings, etc.)
+- Real UK grid carbon intensity data (via National Grid ESO API)
+- Realistic optimization logic based on industry best practices
+- Hypothetical customer benefit calculations
+
+This is purely a technical exploration of what carbon-aware optimization could look like.
 
 ## 🏗️ Tech Stack
 
@@ -124,13 +135,13 @@ Real-time UK grid carbon intensity data with fallback support.
 Comprehensive energy market data including pricing forecasts and optimization recommendations.
 
 ### `/api/optimization-insights`
-Portfolio performance metrics and customer insights from Axle's optimization platform.
+Simulated portfolio performance metrics and customer insights.
 
 ### `/api/optimization-engine`
 Dynamic optimization decision engine that balances financial and environmental factors.
 
 ### `/api/validation-metrics`
-Prediction accuracy metrics validated against real-world optimization outcomes.
+Simulated prediction accuracy metrics based on industry benchmarks.
 
 ## 🎯 Concept Validation
 
@@ -242,13 +253,17 @@ This demonstration showcases:
 
 - **Real UK Grid Data**: Live carbon intensity from National Grid ESO
 - **Interactive Trade-offs**: Compare financial vs environmental optimization strategies
-- **Portfolio Scale**: Simulated insights from 15,000+ managed battery systems
+- **Simulated Portfolio Scale**: Realistic metrics demonstrating potential at scale
 - **Mobile Responsive**: Optimized experience across all devices
 - **Production Ready**: Full CI/CD pipeline with automated testing and deployment
 
 ---
 
 **Exploring the future of energy optimization**
+
+*Concept demo by Daniel Scott - [danieltwscott@gmail.com](mailto:danieltwscott@gmail.com)*
+
+*Built to explore how Axle Energy's proven platform could evolve to include carbon-aware optimization*
 
 *Concept demo by Daniel Scott - [danieltwscott@gmail.com](mailto:danieltwscott@gmail.com)*
 
