@@ -233,14 +233,24 @@ export default function AxleResidentialPlatform() {
 
               <div className="text-center col-span-2 lg:col-span-1">
                 <div className="text-lg sm:text-2xl font-bold text-green-300 mb-2">
-                  {currentIntensity < 200 && currentElectricityPrice < 40
+                  {currentIntensity < 150
                     ? "Charge Now"
-                    : currentIntensity > 350 || currentElectricityPrice > 70
+                    : currentIntensity > 350 || currentElectricityPrice > 80
                       ? "Use Battery"
-                      : "Evaluate"}
+                      : currentIntensity < 250 && currentElectricityPrice < 60
+                        ? "Good to Charge"
+                        : "Evaluate"}
                 </div>
                 <div className="text-xs sm:text-sm text-slate-300 mb-2 sm:mb-3">Quick Recommendation</div>
-                <div className="text-xs text-slate-400">See detailed analysis below</div>
+                <div className="text-xs text-slate-400">
+                  {currentIntensity < 150
+                    ? "Very clean grid - charge immediately"
+                    : currentIntensity > 350 || currentElectricityPrice > 80
+                      ? "High carbon/price - use stored energy"
+                      : currentIntensity < 250 && currentElectricityPrice < 60
+                        ? "Favorable conditions for charging"
+                        : "Mixed signals - see detailed analysis below"}
+                </div>
               </div>
 
               <div className="text-center col-span-2 lg:col-span-1">

@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, TrendingDown, Minus, Leaf, DollarSign } from "lucide-react"
+import { TrendingUp, TrendingDown, Minus, Leaf, PoundSterling } from "lucide-react"
 import { useState, useEffect } from "react"
 
 interface OptimizationDecision {
@@ -83,7 +83,7 @@ export function OptimizationTradeoffs({ carbonIntensity, electricityPrice }: Opt
     <Card className="bg-slate-800 border-slate-600">
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 text-slate-100 text-lg sm:text-xl">
-          <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
+          <PoundSterling className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
           <Leaf className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
           <span className="hidden sm:inline">Optimization Trade-offs Analysis</span>
           <span className="sm:hidden">Trade-offs Analysis</span>
@@ -107,7 +107,7 @@ export function OptimizationTradeoffs({ carbonIntensity, electricityPrice }: Opt
                   : "border-slate-500 text-slate-200 hover:bg-slate-700 text-xs sm:text-sm"
               }
             >
-              <DollarSign className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+              <PoundSterling className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
               Max Savings
             </Button>
             <Button
@@ -184,7 +184,7 @@ export function OptimizationTradeoffs({ carbonIntensity, electricityPrice }: Opt
               {/* Pure Financial */}
               <div className="p-3 bg-slate-700 rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
-                  <DollarSign className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
+                  <PoundSterling className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
                   <span className="font-medium text-xs sm:text-sm text-slate-200">Pure Financial</span>
                 </div>
                 <div className="flex items-center gap-2 mb-1">
