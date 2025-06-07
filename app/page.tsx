@@ -3,9 +3,7 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Leaf, Zap, TrendingUp, Shield } from "lucide-react"
+import { Leaf, Zap, User, Users, Home, Globe } from "lucide-react"
 import { OptimizationTradeoffs } from "./components/optimization-tradeoffs"
 
 interface CarbonData {
@@ -209,10 +207,10 @@ export default function AxleResidentialPlatform() {
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2 text-slate-100 text-lg sm:text-xl">
               <Zap className="w-5 h-5 text-yellow-400" />
-              Current Market Conditions
+              Current UK Grid Conditions
             </CardTitle>
             <CardDescription className="text-slate-300 text-sm">
-              Real-time carbon intensity and electricity pricing
+              Real-time carbon intensity and electricity pricing that affects all customers
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -241,7 +239,7 @@ export default function AxleResidentialPlatform() {
                         ? "Good to Charge"
                         : "Evaluate"}
                 </div>
-                <div className="text-xs sm:text-sm text-slate-300 mb-2 sm:mb-3">Quick Recommendation</div>
+                <div className="text-xs sm:text-sm text-slate-300 mb-2 sm:mb-3">Your Recommendation</div>
                 <div className="text-xs text-slate-400">
                   {currentIntensity < 150
                     ? "Very clean grid - charge immediately"
@@ -257,355 +255,213 @@ export default function AxleResidentialPlatform() {
                 <div className="text-lg sm:text-2xl font-bold text-blue-300 mb-2">
                   {optimizationData?.environmentalImpact.treesEquivalent}
                 </div>
-                <div className="text-xs sm:text-sm text-slate-300 mb-2 sm:mb-3">Trees Planted Equivalent</div>
-                <div className="text-xs text-slate-400">Carbon saved today across all customers</div>
+                <div className="text-xs sm:text-sm text-slate-300 mb-2 sm:mb-3">Trees Planted Today</div>
+                <div className="text-xs text-slate-400">By all Axle customers combined</div>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Optimization Trade-offs Analysis */}
+        {/* Your Personal Benefits Section */}
         <div className="mb-6 sm:mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <User className="w-5 h-5 text-blue-400" />
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-100">Your Personal Benefits</h2>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6">
+            <Card className="bg-blue-900/20 border-blue-800">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300 flex items-center gap-2">
+                  <Home className="w-3 h-3 sm:w-4 sm:h-4" />
+                  Your Monthly Savings
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg sm:text-2xl font-bold text-yellow-300">
+                  £{optimizationData?.customerBenefits.avgMonthlySavings}
+                </div>
+                <p className="text-xs text-slate-400 mt-1">Average savings on your bill</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-blue-900/20 border-blue-800">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Your Carbon Impact</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg sm:text-2xl font-bold text-green-300">
+                  {optimizationData?.customerBenefits.avgCarbonReduction} tonnes
+                </div>
+                <p className="text-xs text-slate-400 mt-1">CO₂ you save per year</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-blue-900/20 border-blue-800">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">
+                  <span className="hidden sm:inline">Your Green Energy Usage</span>
+                  <span className="sm:hidden">Green Energy</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg sm:text-2xl font-bold text-green-300">
+                  {optimizationData?.customerBenefits.greenEnergyUsage}%
+                </div>
+                <p className="text-xs text-slate-400 mt-1">Your clean energy consumption</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-blue-900/20 border-blue-800">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Your Grid Impact</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg sm:text-2xl font-bold text-blue-300">
+                  {optimizationData?.customerBenefits.gridStressReduction}%
+                </div>
+                <p className="text-xs text-slate-400 mt-1">Your peak demand reduction</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Optimization Trade-offs Analysis */}
           <OptimizationTradeoffs carbonIntensity={currentIntensity} electricityPrice={currentElectricityPrice} />
         </div>
 
-        <Tabs defaultValue="environmental-impact" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-3 bg-slate-800 border-slate-600 h-auto">
-            <TabsTrigger
-              value="environmental-impact"
-              className="data-[state=active]:bg-green-600 text-slate-200 text-xs sm:text-sm py-2 px-1 sm:px-3"
-            >
-              <span className="hidden sm:inline">Environmental Impact</span>
-              <span className="sm:hidden">Environment</span>
-            </TabsTrigger>
-            <TabsTrigger
-              value="customer-benefits"
-              className="data-[state=active]:bg-green-600 text-slate-200 text-xs sm:text-sm py-2 px-1 sm:px-3"
-            >
-              <span className="hidden sm:inline">Your Benefits</span>
-              <span className="sm:hidden">Benefits</span>
-            </TabsTrigger>
-            <TabsTrigger
-              value="portfolio-performance"
-              className="data-[state=active]:bg-green-600 text-slate-200 text-xs sm:text-sm py-2 px-1 sm:px-3"
-            >
-              <span className="hidden sm:inline">Platform Performance</span>
-              <span className="sm:hidden">Performance</span>
-            </TabsTrigger>
-          </TabsList>
+        {/* Platform Performance Section */}
+        <div className="mb-6 sm:mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <Users className="w-5 h-5 text-green-400" />
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-100">Axle Platform Performance</h2>
+            <Badge className="bg-slate-700 text-slate-300">All 15,000+ Customers</Badge>
+          </div>
 
-          {/* Environmental Impact Tab */}
-          <TabsContent value="environmental-impact" className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300 flex items-center gap-2">
-                    <Leaf className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span className="hidden sm:inline">Carbon Saved Today</span>
-                    <span className="sm:hidden">Carbon Saved</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg sm:text-2xl font-bold text-green-300">
-                    {optimizationData?.environmentalImpact.dailyCarbonSaved} tonnes
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">CO₂ emissions prevented</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Monthly Impact</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-base sm:text-lg font-bold text-green-300">711 tonnes</div>
-                  <p className="text-xs text-slate-400 mt-1">= 142 cars off the road</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Yearly Projection</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-base sm:text-lg font-bold text-green-300">
-                    {optimizationData?.environmentalImpact.yearlyProjection.toLocaleString()} tonnes
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">Annual carbon reduction</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Trees Equivalent</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg sm:text-2xl font-bold text-green-300">
-                    {optimizationData?.environmentalImpact.treesEquivalent}
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">Trees planted equivalent (today)</p>
-                </CardContent>
-              </Card>
-            </div>
-
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6">
             <Card className="bg-slate-800 border-slate-600">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-slate-100 text-lg sm:text-xl">
-                  <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
-                  Carbon-Aware Optimization in Action
-                </CardTitle>
-                <CardDescription className="text-slate-300 text-sm">
-                  How Axle automatically reduces your carbon footprint while maximizing savings
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 bg-slate-700 rounded-lg gap-2 sm:gap-0">
-                    <div>
-                      <h4 className="font-medium text-slate-100 text-sm sm:text-base">Smart Charging Schedule</h4>
-                      <p className="text-xs sm:text-sm text-slate-300">
-                        Automatically charges your battery when grid carbon intensity is lowest
-                      </p>
-                    </div>
-                    <Badge className="bg-green-500/30 text-green-300 border-0 self-start sm:self-center">Active</Badge>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 bg-slate-700 rounded-lg gap-2 sm:gap-0">
-                    <div>
-                      <h4 className="font-medium text-slate-100 text-sm sm:text-base">Peak Avoidance</h4>
-                      <p className="text-xs sm:text-sm text-slate-300">
-                        Uses stored clean energy during high-carbon periods
-                      </p>
-                    </div>
-                    <Badge className="bg-green-500/30 text-green-300 border-0 self-start sm:self-center">Active</Badge>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 bg-slate-700 rounded-lg gap-2 sm:gap-0">
-                    <div>
-                      <h4 className="font-medium text-slate-100 text-sm sm:text-base">Solar Optimization</h4>
-                      <p className="text-xs sm:text-sm text-slate-300">
-                        Maximizes use of your own clean solar generation
-                      </p>
-                    </div>
-                    <Badge className="bg-green-500/30 text-green-300 border-0 self-start sm:self-center">Active</Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* Customer Benefits Tab */}
-          <TabsContent value="customer-benefits" className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Monthly Savings</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg sm:text-2xl font-bold text-yellow-300">
-                    £{optimizationData?.customerBenefits.avgMonthlySavings}
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">Average per customer</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Carbon Reduction</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg sm:text-2xl font-bold text-green-300">
-                    {optimizationData?.customerBenefits.avgCarbonReduction} tonnes
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">Per year per customer</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">
-                    <span className="hidden sm:inline">Green Energy Usage</span>
-                    <span className="sm:hidden">Green Energy</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg sm:text-2xl font-bold text-green-300">
-                    {optimizationData?.customerBenefits.greenEnergyUsage}%
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">Clean energy consumption</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Grid Impact</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg sm:text-2xl font-bold text-blue-300">
-                    {optimizationData?.customerBenefits.gridStressReduction}%
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">Peak demand reduction</p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <Card className="bg-slate-800 border-slate-600">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-slate-100 text-lg sm:text-xl">
-                  <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
-                  Why Choose Axle's Carbon-Smart Optimization?
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">
+                  <span className="hidden sm:inline">Home Batteries Managed</span>
+                  <span className="sm:hidden">Batteries</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                  <div className="space-y-3 sm:space-y-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <h4 className="font-medium text-slate-100 text-sm sm:text-base">Real-Time Carbon Data</h4>
-                        <p className="text-xs sm:text-sm text-slate-300">
-                          Uses live UK grid carbon intensity to make the greenest decisions
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <h4 className="font-medium text-slate-100 text-sm sm:text-base">Dual Optimization</h4>
-                        <p className="text-xs sm:text-sm text-slate-300">
-                          Maximizes both financial savings AND environmental benefits
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <h4 className="font-medium text-slate-100 text-sm sm:text-base">Proven Results</h4>
-                        <p className="text-xs sm:text-sm text-slate-300">
-                          94.2% success rate across 15,000+ optimized batteries
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-3 sm:space-y-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <h4 className="font-medium text-slate-100 text-sm sm:text-base">Automatic Operation</h4>
-                        <p className="text-xs sm:text-sm text-slate-300">
-                          No manual intervention required - works 24/7 in the background
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <h4 className="font-medium text-slate-100 text-sm sm:text-base">Future-Proof</h4>
-                        <p className="text-xs sm:text-sm text-slate-300">
-                          Adapts to changing grid conditions and energy markets
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <h4 className="font-medium text-slate-100 text-sm sm:text-base">ESG Reporting</h4>
-                        <p className="text-xs sm:text-sm text-slate-300">
-                          Detailed carbon impact reports for sustainability goals
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="text-lg sm:text-2xl font-bold text-blue-300">
+                  {optimizationData?.portfolioPerformance.assetsOptimized.toLocaleString()}
                 </div>
+                <p className="text-xs text-slate-400 mt-1">Homes in our network</p>
               </CardContent>
             </Card>
-          </TabsContent>
 
-          {/* Portfolio Performance Tab */}
-          <TabsContent value="portfolio-performance" className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">
-                    <span className="hidden sm:inline">Assets Optimized</span>
-                    <span className="sm:hidden">Assets</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg sm:text-2xl font-bold text-blue-300">
-                    {optimizationData?.portfolioPerformance.assetsOptimized.toLocaleString()}
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">
-                    <span className="hidden sm:inline">Home batteries under management</span>
-                    <span className="sm:hidden">Batteries managed</span>
-                  </p>
-                </CardContent>
-              </Card>
+            <Card className="bg-slate-800 border-slate-600">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Network Capacity</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg sm:text-2xl font-bold text-green-300">
+                  {optimizationData?.portfolioPerformance.totalCapacity} MW
+                </div>
+                <p className="text-xs text-slate-400 mt-1">Combined storage power</p>
+              </CardContent>
+            </Card>
 
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Total Capacity</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg sm:text-2xl font-bold text-green-300">
-                    {optimizationData?.portfolioPerformance.totalCapacity} MW
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">
-                    <span className="hidden sm:inline">Aggregated storage capacity</span>
-                    <span className="sm:hidden">Storage capacity</span>
-                  </p>
-                </CardContent>
-              </Card>
+            <Card className="bg-slate-800 border-slate-600">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Total Daily Savings</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg sm:text-2xl font-bold text-yellow-300">
+                  £{optimizationData?.portfolioPerformance.dailyRevenue.toLocaleString()}
+                </div>
+                <p className="text-xs text-slate-400 mt-1">Across all customers today</p>
+              </CardContent>
+            </Card>
 
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Daily Revenue</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg sm:text-2xl font-bold text-yellow-300">
-                    £{optimizationData?.portfolioPerformance.dailyRevenue.toLocaleString()}
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">
-                    <span className="hidden sm:inline">Generated for customers today</span>
-                    <span className="sm:hidden">Generated today</span>
-                  </p>
-                </CardContent>
-              </Card>
+            <Card className="bg-slate-800 border-slate-600">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Platform Accuracy</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg sm:text-2xl font-bold text-purple-300">
+                  {optimizationData?.portfolioPerformance.successRate}%
+                </div>
+                <p className="text-xs text-slate-400 mt-1">Optimization success rate</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
 
-              <Card className="bg-slate-800 border-slate-600">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Success Rate</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg sm:text-2xl font-bold text-purple-300">
-                    {optimizationData?.portfolioPerformance.successRate}%
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">Optimization accuracy</p>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-        </Tabs>
+        {/* Environmental Impact Section */}
+        <div className="mb-6 sm:mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <Globe className="w-5 h-5 text-green-400" />
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-100">Combined Environmental Impact</h2>
+          </div>
 
-        {/* Footer */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+            <Card className="bg-slate-800 border-slate-600">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300 flex items-center gap-2">
+                  <Leaf className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">Carbon Saved Today</span>
+                  <span className="sm:hidden">Carbon Saved</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg sm:text-2xl font-bold text-green-300">
+                  {optimizationData?.environmentalImpact.dailyCarbonSaved} tonnes
+                </div>
+                <p className="text-xs text-slate-400 mt-1">All customers combined</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-slate-800 border-slate-600">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Monthly Impact</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-base sm:text-lg font-bold text-green-300">711 tonnes</div>
+                <p className="text-xs text-slate-400 mt-1">= 142 cars off the road</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-slate-800 border-slate-600">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Yearly Projection</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-base sm:text-lg font-bold text-green-300">
+                  {optimizationData?.environmentalImpact.yearlyProjection.toLocaleString()} tonnes
+                </div>
+                <p className="text-xs text-slate-400 mt-1">Annual carbon reduction</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-slate-800 border-slate-600">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Trees Equivalent</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg sm:text-2xl font-bold text-green-300">
+                  {optimizationData?.environmentalImpact.treesEquivalent}
+                </div>
+                <p className="text-xs text-slate-400 mt-1">Trees planted equivalent (today)</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Simple Footer */}
         <div className="mt-8 sm:mt-12 text-center border-t border-slate-600 pt-6 sm:pt-8">
-          <div className="mb-4 sm:mb-6">
-            <h3 className="text-base sm:text-lg font-semibold mb-2 text-slate-100">Join the Green Energy Revolution</h3>
-            <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base px-4">
-              Axle's carbon-aware optimization helps you save money while reducing your environmental impact. Every
-              optimized battery contributes to a cleaner, more sustainable energy system.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
-            <Button variant="outline" className="border-slate-500 text-slate-200 hover:bg-slate-700 w-full sm:w-auto">
-              Learn More
-            </Button>
-            <Button className="bg-green-600 hover:bg-green-700 text-white w-full sm:w-auto">Get Started Today</Button>
-          </div>
-
-          <div className="mt-4 sm:mt-6 text-xs sm:text-sm text-slate-400">
-            Real-time carbon data from UK National Grid ESO
+          <div className="text-xs sm:text-sm text-slate-400 space-y-1">
+            <div>Real-time carbon data from UK National Grid ESO</div>
+            <div>
+              Demo created by{" "}
+              <a href="mailto:danieltwscott@gmail.com" className="text-green-400 hover:text-green-300">
+                Daniel Scott
+              </a>{" "}
+              for Axle Energy
+            </div>
           </div>
         </div>
       </div>

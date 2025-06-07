@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, TrendingDown, Minus, Leaf, PoundSterling } from "lucide-react"
+import { TrendingUp, TrendingDown, Minus, Leaf, PoundSterling, User } from "lucide-react"
 import { useState, useEffect } from "react"
 
 interface OptimizationDecision {
@@ -80,22 +80,23 @@ export function OptimizationTradeoffs({ carbonIntensity, electricityPrice }: Opt
   }
 
   return (
-    <Card className="bg-slate-800 border-slate-600">
+    <Card className="bg-blue-900/20 border-blue-800">
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 text-slate-100 text-lg sm:text-xl">
+          <User className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
           <PoundSterling className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
           <Leaf className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
-          <span className="hidden sm:inline">Optimization Trade-offs Analysis</span>
-          <span className="sm:hidden">Trade-offs Analysis</span>
+          <span className="hidden sm:inline">Your Optimization Preferences</span>
+          <span className="sm:hidden">Your Preferences</span>
         </CardTitle>
         <CardDescription className="text-slate-300 text-sm">
-          How we balance financial savings with environmental impact
+          Customize how we balance your financial savings with environmental impact
         </CardDescription>
       </CardHeader>
       <CardContent>
         {/* Customer Preference Selector */}
         <div className="mb-4 sm:mb-6">
-          <h4 className="font-medium mb-3 text-slate-200 text-sm sm:text-base">Your Optimization Preference:</h4>
+          <h4 className="font-medium mb-3 text-slate-200 text-sm sm:text-base">Your Optimization Priority:</h4>
           <div className="flex flex-col sm:flex-row gap-2">
             <Button
               variant={preference === "savings" ? "default" : "outline"}
@@ -141,11 +142,15 @@ export function OptimizationTradeoffs({ carbonIntensity, electricityPrice }: Opt
         {/* Current Decision */}
         <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-slate-700 rounded-lg">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2 sm:gap-0">
-            <h4 className="font-medium text-slate-100 text-sm sm:text-base">Current Recommendation:</h4>
+            <h4 className="font-medium text-slate-100 text-sm sm:text-base">Your Current Recommendation:</h4>
             <div className="flex items-center gap-2">
               {getActionIcon(decision.action)}
               <span className={`font-semibold capitalize text-sm sm:text-base ${getActionColor(decision.action)}`}>
-                {decision.action}
+                {decision.action === "charge"
+                  ? "Charge Your Battery"
+                  : decision.action === "discharge"
+                    ? "Use Your Battery"
+                    : "Hold Position"}
               </span>
             </div>
           </div>
@@ -155,13 +160,13 @@ export function OptimizationTradeoffs({ carbonIntensity, electricityPrice }: Opt
               <div className="text-base sm:text-lg font-semibold text-yellow-300">
                 £{decision.financialImpact.toFixed(2)}
               </div>
-              <div className="text-xs text-slate-400">Daily financial impact</div>
+              <div className="text-xs text-slate-400">Your daily financial impact</div>
             </div>
             <div>
               <div className="text-base sm:text-lg font-semibold text-green-300">
                 {decision.carbonImpact.toFixed(1)} kg
               </div>
-              <div className="text-xs text-slate-400">CO₂ saved per day</div>
+              <div className="text-xs text-slate-400">CO₂ you save per day</div>
             </div>
           </div>
         </div>
@@ -196,7 +201,7 @@ export function OptimizationTradeoffs({ carbonIntensity, electricityPrice }: Opt
                 <div className="text-yellow-300 font-semibold text-sm sm:text-base">
                   £{decision.tradeoffAnalysis.pureFinancial.value.toFixed(2)}
                 </div>
-                <div className="text-xs text-slate-400">Daily savings</div>
+                <div className="text-xs text-slate-400">Your daily savings</div>
               </div>
 
               {/* Pure Environmental */}
@@ -214,7 +219,7 @@ export function OptimizationTradeoffs({ carbonIntensity, electricityPrice }: Opt
                 <div className="text-green-300 font-semibold text-sm sm:text-base">
                   {decision.tradeoffAnalysis.pureEnvironmental.value.toFixed(1)} kg
                 </div>
-                <div className="text-xs text-slate-400">CO₂ saved</div>
+                <div className="text-xs text-slate-400">CO₂ you save</div>
               </div>
 
               {/* Your Choice */}
@@ -229,7 +234,7 @@ export function OptimizationTradeoffs({ carbonIntensity, electricityPrice }: Opt
                 <div className="text-blue-300 font-semibold text-sm sm:text-base">
                   £{decision.financialImpact.toFixed(2)} + {decision.carbonImpact.toFixed(1)}kg
                 </div>
-                <div className="text-xs text-slate-400">Combined benefit</div>
+                <div className="text-xs text-slate-400">Your combined benefit</div>
               </div>
             </div>
           </TabsContent>
